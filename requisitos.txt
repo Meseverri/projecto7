@@ -1,0 +1,41 @@
+DESCRIPTION
+Recuerda realizar este proyecto después de haber consumido la sesión 16: API REST AUTH
+
+TIENE que ser un nuevo proyecto, no podéis partir del anterior, haremos uno nuevo 
+con diferente temática, esto, os permitirá encontraros con diferentes lógicas de 
+negocio al tener temáticas diferentes y adaptaros mejor a los contenidos.
+
+Este proyecto, lo podéis hacer de la temática que prefiráis siempre y cuando se 
+cumplan los requisitos mínimos.
+
+Los criterios de evaluación son MÍNIMOS, siempre os invitamos a dar un paso más.
+
+IMPORTANTE! Recuerda también entregar tu .env para que podamos corregirlo con mayor 
+facilidad
+
+La base de datos tiene que tener una IP pública, la mítica de 0.0.0.0/0 recordad ponerla.
+
+Para el README.md con la documentación del proyecto, os dejamos por aquí un recurso 
+que utilizamos mucho para facilitar su creación: https://dillinger.io/
+
+Esta herramienta os permitirá ver en directo cómo se renderizará vuestro README, además 
+de enseñaros cómo se hacen tablas, listas, etc.
+
+En este proyecto es muy importante pensar bien en todo lo que pueden hacer los usuarios y 
+en las modificaciones o creaciones de estos mismos, ya que es importante que todo tenga 
+lógica y sea seguro.
+
+REQUIREMENTS
+*Servidor con express
+    Conexión a una base de datos de Mongo Atlas mediante mongoose
+*Creación de tres modelos, uno de ellos el de users
+Una semilla que suba datos a una de las colecciones
+    Dos relaciones entre colecciones, la idea es que los usuarios tengan un dato relacionado también
+CRUD completo de todas las colecciones
+2 roles de usuario con diferentes permisos
+README.md con la documentación del proyecto, indicando los endpoints y que hace cada uno
+Los usuarios sólo pueden ser creados con rol user
+    Crearemos nuestro primer admin cambiando su rol directamente en la BBDD
+    Los admins pueden modificar a un usuario normal para cambiar su rol y hacerlo admin también
+    Los admins pueden eliminar usuarios, pero un usuario se puede eliminar a si mismo
+    Existe un middleware que compruebe el token que se aporta en la petición para dejar pasar o mostrar un mensaje de error
