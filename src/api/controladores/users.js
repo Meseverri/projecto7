@@ -22,7 +22,7 @@ const register = async (req, res, next) => {
 const login = async (req, res, next) => {
     try {
       const { userName, password } = req.body;
-      const user = await User.findOne({ userName: userName });
+      const user = await User.findOne({ userName: userName }).populate("bookPublished");
       if (user) {
         if (bcrypt.compareSync(password, user.password)) {
           const token = generateSign(user._id);
