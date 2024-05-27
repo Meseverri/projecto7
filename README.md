@@ -50,14 +50,15 @@ This API allows users to manage books, reviews, and user information. It include
 - POST /users/login: Login a user
 - GET /users/:id: Get user information
 - PUT /users/:id: Update user information
-- DELETE /users/:id: Soft delete a user
+- DELETE /users/:id: Delete a user
 
 ### Books
 
-- POST /books: Add a new book
-- GET /books/:id: Get book details
-- PUT /books/:id: Update book information
-- DELETE /books/:id: Soft delete a book
+- POST /books/:authorId : Add a new book
+- GET /books/:id : Get book details
+- GET /books/: Get all book
+- PUT /books/:id : Update book information
+- DELETE /books/:id : Soft delete a book
 
 ### Reviews
 
