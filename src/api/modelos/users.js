@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema(
     bookReviews:[{type: mongoose.Types.ObjectId, ref: "Review"} ],
     bookPublished:[{type:mongoose.Types.ObjectId ,ref:"Book"}],
     role:{type: String,default:"user",enum:["user","author","admin"]}
+    
   }
 );
 
