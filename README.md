@@ -20,9 +20,8 @@ This API allows users to manage books, reviews, and user information. It include
 - *password*: String, required
 - *name*: String, required
 - *book_reviews*: Array of ObjectIDs (references to Review)
-- *blog_reviews*: Array of ObjectIDs (references to Blog)
-- *publish*: Array of ObjectIDs (references to Book)
-- *deleted*: Boolean, default is false
+- *bookPublished*: Array of ObjectIDs (references to Book)
+- *role*: String, default is "user", enum: ["user", "author", "admin"]
 
 ### Book Schema
 
@@ -47,7 +46,8 @@ This API allows users to manage books, reviews, and user information. It include
 
 ### Users
 
-- POST /users: Create a new user
+- POST /users/register: Create a new user
+- POST /users/login: Login a user
 - GET /users/:id: Get user information
 - PUT /users/:id: Update user information
 - DELETE /users/:id: Soft delete a user
@@ -84,13 +84,11 @@ Make API requests to the server using a tool like Postman or cURL.
 
 ## User Schema
 
-- *username*: This is the unique identifier for the user. It is a required field.
-- *password*: This is the password for the user account. It is a required field.
-- *name*: This is the name of the user. It is a required field.
-- *book_reviews*: This field contains an array of ObjectIDs that reference the reviews made by the user on books.
-- *blog_reviews*: This field contains an array of ObjectIDs that reference the reviews made by the user on blogs.
-- *publish*: This field contains an array of ObjectIDs that reference the books published by the user.
-- *deleted*: This is a boolean field that indicates if the user has been soft deleted.
+- **userName**: This is the unique identifier for the user. It is a required field.
+- **password**: This is the password for the user account. It is a required field.
+- **bookReviews**: This field contains an array of ObjectIDs that reference the reviews made by the user on books.
+- **bookPublished**: This field contains an array of ObjectIDs that reference the books published by the user.
+- **role**: This is the role of the user. It is a string with a default value of "user" and can be one of the following values: "user", "author", or "admin".
 
 ## Book Schema
 

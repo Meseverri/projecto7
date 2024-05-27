@@ -34,8 +34,8 @@
     },
     {
       "type": "text",
-      "version": 85,
-      "versionNonce": 1684492520,
+      "version": 86,
+      "versionNonce": 368546152,
       "isDeleted": false,
       "id": "-4SD1ThhwHxaXXuTzQCG-",
       "fillStyle": "solid",
@@ -55,7 +55,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1716275204018,
+      "updated": 1716454399713,
       "link": null,
       "locked": false,
       "fontSize": 36,
@@ -66,7 +66,7 @@
       "containerId": null,
       "originalText": "Users\n",
       "lineHeight": 1.25,
-      "baseline": 77
+      "baseline": 76
     },
     {
       "type": "rectangle",
@@ -99,8 +99,8 @@
     },
     {
       "type": "text",
-      "version": 158,
-      "versionNonce": 1965068696,
+      "version": 159,
+      "versionNonce": 336763160,
       "isDeleted": false,
       "id": "h1ylMw7xsMGUUiaLz5M2c",
       "fillStyle": "solid",
@@ -120,7 +120,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1716275204020,
+      "updated": 1716454399713,
       "link": null,
       "locked": false,
       "fontSize": 36,
@@ -131,7 +131,7 @@
       "containerId": null,
       "originalText": "Books",
       "lineHeight": 1.25,
-      "baseline": 32
+      "baseline": 31
     },
     {
       "type": "rectangle",
@@ -164,8 +164,8 @@
     },
     {
       "type": "text",
-      "version": 1015,
-      "versionNonce": 1478292456,
+      "version": 1016,
+      "versionNonce": 1590764648,
       "isDeleted": false,
       "id": "o8AqxrJCVnCauZyQwlRYX",
       "fillStyle": "solid",
@@ -185,7 +185,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1716275204028,
+      "updated": 1716454399717,
       "link": null,
       "locked": false,
       "fontSize": 36,
@@ -196,7 +196,7 @@
       "containerId": null,
       "originalText": "Plantamiento:\n-Los users van a ser unicos por su correo e email\n-podran likear libros \n-publicaran opiniones y reviews\n\n\nel rol de autor tendra la capacidad de publicar y eliminar sus \nlobros \nel rol de admin sera capaz de publicitar libros y eliminar contnido \ninapropiuado\n\nfunciones de:\n    usuario\n        -Ragistrarse\n        -Login\n        -getBooksOfAuther (userId)\n        -getReviewsOfUser\n\n    libros\n        -publicar un libro \n        -getBook (idBook)\n        -getAllBooks \n        -deleteBook (idUser) \n\n    reviews\n        -postReview(bookId)\n        -getReviews\n\n\n \n\n\n\n\n\n",
       "lineHeight": 1.25,
-      "baseline": 1607
+      "baseline": 1606
     },
     {
       "type": "rectangle",
@@ -229,8 +229,8 @@
     },
     {
       "type": "text",
-      "version": 99,
-      "versionNonce": 2068487832,
+      "version": 100,
+      "versionNonce": 227522072,
       "isDeleted": false,
       "id": "rQPLejrvx87z9WLrjRWdM",
       "fillStyle": "solid",
@@ -250,7 +250,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1716275204029,
+      "updated": 1716454399718,
       "link": null,
       "locked": false,
       "fontSize": 36,
@@ -261,12 +261,12 @@
       "containerId": null,
       "originalText": "reviews",
       "lineHeight": 1.25,
-      "baseline": 32
+      "baseline": 31
     },
     {
       "type": "text",
-      "version": 186,
-      "versionNonce": 723924712,
+      "version": 187,
+      "versionNonce": 486561640,
       "isDeleted": false,
       "id": "1URty2zTvr2dGV58BCp5S",
       "fillStyle": "solid",
@@ -286,7 +286,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1716275204059,
+      "updated": 1716454399722,
       "link": null,
       "locked": false,
       "fontSize": 36,
@@ -301,8 +301,8 @@
     },
     {
       "type": "text",
-      "version": 133,
-      "versionNonce": 715852696,
+      "version": 137,
+      "versionNonce": 1193570152,
       "isDeleted": false,
       "id": "Ow-UWEg5SjKNx3yF5M-Io",
       "fillStyle": "solid",
@@ -311,8 +311,8 @@
       "roughness": 1,
       "opacity": 100,
       "angle": 0,
-      "x": 859.9590454101512,
-      "y": 410.44879742021794,
+      "x": 862.8562316894481,
+      "y": 409.17926617021794,
       "strokeColor": "#ffffff",
       "backgroundColor": "transparent",
       "width": 464.0625,
@@ -322,7 +322,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1716275204064,
+      "updated": 1716454438200,
       "link": null,
       "locked": false,
       "fontSize": 36,
@@ -337,8 +337,8 @@
     },
     {
       "type": "text",
-      "version": 166,
-      "versionNonce": 1913592296,
+      "version": 167,
+      "versionNonce": 1422994024,
       "isDeleted": false,
       "id": "1wJUviIwKf9-oDXxjv_cI",
       "fillStyle": "solid",
@@ -358,7 +358,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1716275204066,
+      "updated": 1716454399724,
       "link": null,
       "locked": false,
       "fontSize": 36,
