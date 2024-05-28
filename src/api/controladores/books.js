@@ -43,16 +43,24 @@ const getBooks = async (req, res) => {
     const books = await Book.find();
     return res.status(200).json(books);
   } catch (error) {
+    return res.status(400).json(error);
 
   }
 };
 const getBook = async (req, res) => {
   try {
-  } catch (error) {}
+    const { id } = req.params;
+    const book = await Book.findById(id);
+    return res.status(200).json(book);
+  } catch (error) {
+    return res.status(400).json(error);
+  }
 };
 
 const editBook = async (req, res) => {
   try {
+    const { bookId,authorId } = req.params;
+    
   } catch (error) {}
 };
 
@@ -61,4 +69,4 @@ const deleteBook = async (res, req) => {
   } catch (error) {}
 };
 
-module.exports = { createBook,getBooks };
+module.exports = { createBook, getBooks, getBook ,editBook,deleteBook};
