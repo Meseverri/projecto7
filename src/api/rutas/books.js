@@ -4,9 +4,10 @@ const { createBook, getBooks, getBook,editBook,deleteBook } = require("../contro
 const bookRoutes = require("express").Router();
 
 bookRoutes.post("/:authorId",authorAuth,createBook);
-bookRoutes.get("",authenticateUser,getBooks);
+bookRoutes.get("",getBooks);
 bookRoutes.get("/:bookId",authenticateUser,getBook);
 bookRoutes.put("/:bookId/:authorId",authorAuth,editBook)
+bookRoutes.delete("/:bookId/:authorId",authorAuth,deleteBook)
 
 
 

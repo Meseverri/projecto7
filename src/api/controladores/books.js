@@ -1,3 +1,4 @@
+const mongoose  = require("mongoose");
 const { Book } = require("../modelos/books");
 const { User } = require("../modelos/users");
 
@@ -60,13 +61,50 @@ const getBook = async (req, res) => {
 const editBook = async (req, res) => {
   try {
     const { bookId,authorId } = req.params;
-    
-  } catch (error) {}
+    const author= await User.findById(authorId);
+    const objBookId = new mongoose.Types.ObjectId(bookId);
+    if (author.bookPublished.includes(objBookId)) {
+      const {title:newtitle,genres:newGenreList,description:newDescription}=req.body;
+      const updateFields = {};
+      if (newtitle) updateFields.title = newtitle;
+      // if (newGenreList) updateFields.$push = { cart: newToCart };
+      if (newGenreList) updateFields.genres =  newGenreList ;
+      if (newDescription) updateFields.description = newDescription;
+
+      const updatedBook = await Book.findByIdAndUpdate(
+        bookId,
+        updateFields,
+        { new: true }
+      )
+      return res.status(201).json(updatedBook)
+    } else{
+      return res.status(400).json("You are not the author of this book")
+    }
+  } catch (error) {
+    console.log(error)
+    return res.status(400).json(error);
+  }
 };
 
-const deleteBook = async (res, req) => {
+const deleteBook = async (req, res) => {
   try {
-  } catch (error) {}
+    const { bookId,authorId } = req.params;
+    const author= await User.findById(authorId);
+    const objBookId = new mongoose.Types.ObjectId(bookId);
+    if (author.bookPublished.includes(objBookId)){
+
+      const bookDeleted = await Book.findByIdAndDelete(bookId);
+      if (!bookDeleted) {
+        return res.status(404);
+      };
+      return res.status(200).json({
+        mensaje: "Este libro ha sido eliminado",
+        bookDeleted,
+      });
+    }
+  } catch (error) {
+     return res.status(500).json(error);
+  }
 };
 
 module.exports = { createBook, getBooks, getBook ,editBook,deleteBook};
