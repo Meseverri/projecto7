@@ -22,9 +22,6 @@ const createBook = async (req, res, next) => {
     if (bookDuplicated) {
       return res.status(400).json("el libro ya esta creado");
     }
-
-    // const author= new User();
-    // author._id=authorId
     const authorBookUpdated = await User.findByIdAndUpdate(
       authorId,
       { $push: { bookPublished: newBook._id } },
@@ -97,6 +94,9 @@ const deleteBook = async (req, res) => {
       if (!bookDeleted) {
         return res.status(404);
       };
+
+      author.bookPublished.pull(objBookId);
+      await author.save();
       return res.status(200).json({
         mensaje: "Este libro ha sido eliminado",
         bookDeleted,
