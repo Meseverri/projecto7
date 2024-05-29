@@ -10,7 +10,6 @@ This API allows users to manage books, reviews, and user information. It include
 - CRUD operations for books and reviews
 - Comments on reviews
 - Rating system for books
-- Soft deletion for books and reviews
 
 ## Schemas
 
@@ -40,7 +39,6 @@ This API allows users to manage books, reviews, and user information. It include
 - *comments*: Array of ObjectIDs (references to User)
 - *rating*: Number, required
 - *blog_id*: ObjectID (reference to Blog)
-- *deleted*: Boolean, default is false
 
 ## API Endpoints
 
@@ -55,9 +53,9 @@ This API allows users to manage books, reviews, and user information. It include
 ### Books
 
 - POST /books/:authorId : Add a new book
-- GET /books/:id : Get book details
+- GET /books/:id : Get book details 
 - GET /books/: Get all book
-- PUT /books/:id : Update book information
+- PUT /books/:bookId/:authoId : Update book information
 - DELETE /books/:id : Soft delete a book
 
 ### Reviews
@@ -67,11 +65,6 @@ This API allows users to manage books, reviews, and user information. It include
 - PUT /reviews/:id: Update review information
 - DELETE /reviews/:id: Soft delete a review
 
-## Installation
-
-1. Clone the repository
-2. Install dependencies: npm install
-3. Start the server: npm start
 
 ## Usage
 
@@ -93,48 +86,49 @@ Make API requests to the server using a tool like Postman or cURL.
 
 ## Book Schema
 
-- *author_id*: This field references the User ID of the book's author. It is a required field.
-- *name*: This is the name of the book. It is a required field.
-- *number_of_pages*: This is the total number of pages in the book. It is a required field.
-- *reviews*: This field contains an array of ObjectIDs that reference the reviews for the book.
-- *deleted*: This is a boolean field that indicates if the book has been soft deleted.
+- **authorId**: This field references the User ID of the book's author. It is a required field.
+- **title**: This is the title of the book. It is a required field.
+- **genres**: This field contains an array of strings that represent the genres of the book. It is an optional field.
+- **description**: This is a description of the book. It is an optional field.
+- **reviewsId**: This field contains an array of ObjectIDs that reference the reviews for the book.
+- **createdAt**: This field contains the date and time when the book was created. It is managed automatically by Mongoose.
+- **updatedAt**: This field contains the date and time when the book was last updated. It is managed automatically by Mongoose.
 
 ## Review Schema
 
-- *timestamp*: This field contains the date and time when the review was created. The default value is the current date and time.
-- *user_id*: This field references the User ID of the person who wrote the review. It is a required field.
-- *book_id*: This field references the Book ID for which the review was written. It is a required field.
-- *body*: This field contains the main content of the review. It is a required field.
-- *comments*: This field contains an array of ObjectIDs that reference the users who commented on the review.
-- *rating*: This field contains the rating given by the user. It is a required field.
-- *blog_id*: This field references the Blog ID if the review is a blog review.
-- *deleted*: This is a boolean field that indicates if the review has been soft deleted.
+- **userId**: ObjectID (reference to User), required
+- **body**: String, optional
+- **rating**: Number, required, minimum value is 1, maximum value is 6
+- **bookId**: ObjectID (reference to Book), required
+- **createdAt**: Date, default is the current date and time (automatically managed by Mongoose)
+- **updatedAt**: Date, default is the current date and time (automatically managed by Mongoose)
 
 ## API Endpoints
 
 ### Users
 
-- POST /users: Create a new user
-  - Request body: { "username": "string", "password": "string", "name": "string" }
-- GET /users/:id: Get user information by ID
-- PUT /users/:id: Update user information by ID
-  - Request body: { "username": "string", "password": "string", "name": "string" }
-- DELETE /users/:id: Soft delete a user by ID
+- `POST /users`: Create a new user
+  - Request body: `{ "username": "string", "password": "string", "name": "string" }`
+- `GET /users/:id`: Get user information by ID
+- `PUT /users/:id`: Update user information by ID
+  - Request body: `{ "username": "string", "password": "string", "name": "string" }`
+- `DELETE /users/:id`: Delete a user by ID
 
 ### Books
 
-- POST /books: Add a new book
-  - Request body: { "author_id": "ObjectID", "name": "string", "number_of_pages": "number" }
-- GET /books/:id: Get book details by ID
-- PUT /books/:id: Update book information by ID
-  - Request body: { "author_id": "ObjectID", "name": "string", "number_of_pages": "number" }
-- DELETE /books/:id: Soft delete a book by ID
+- `POST /books`: Add a new book
+  - Request body: `{ "authorId": "ObjectID", "title": "string", "genres": ["string"], "description": "string" }`
+- `GET /books`: Get all book details 
+- `GET /books/:id`: Get book details by ID
+- `PUT /books/:bookId/:authorId`: Update book information by ID and validating the author,*Note: the genere list will be replaced completly*
+  - Request body: `{"title": "string", "genres": ["string"], "description": "string" }`
+- `DELETE /books/:id`: Delete a book by ID
 
 ### Reviews
 
-- POST /reviews: Add a new review
-  - Request body: { "user_id": "ObjectID", "book_id": "ObjectID", "body": "string", "rating": "number", "blog_id": "ObjectID" }
-- GET /reviews/:id: Get review details by ID
-- PUT /reviews/:id: Update review information by ID
-  - Request body: { "user_id": "ObjectID", "book_id": "ObjectID", "body": "string", "rating": "number", "blog_id": "ObjectID" }
-- DELETE /reviews/:id: Soft delete a review by ID
+ `POST /reviews/:userId/:bookId`: Add a new review
+  - Request body: `{ "body": "string", "rating": "number", "bookId": "ObjectID" }`
+- `GET /reviews/:id`: Get review details by ID
+- `PUT /reviews/:id`: Update review information by ID
+  - Request body: `{ "userId": "ObjectID", "body": "string", "rating": "number", "bookId": "ObjectID" }`
+- `DELETE /reviews/:id`: Soft delete a review by ID
