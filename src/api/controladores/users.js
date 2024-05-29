@@ -74,8 +74,6 @@ const deleteUser = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    console.log("sldnflsajfd");
-
     return res.status(500).json(error);
   }
 };
