@@ -1,9 +1,9 @@
-const { authenticateUser,adminAuth, authorAuth } = require("../../middlewares/auth");
+const { authenticateUser,authorAuth } = require("../../middlewares/auth");
 const { createBook, getBooks, getBook,editBook,deleteBook } = require("../controladores/books");
 
 const bookRoutes = require("express").Router();
 
-bookRoutes.post("/:authorId",authorAuth,createBook);
+bookRoutes.post("/:authorId",authenticateUser,createBook);
 bookRoutes.get("",getBooks);
 bookRoutes.get("/:bookId",authenticateUser,getBook);
 bookRoutes.put("/:bookId/:authorId",authorAuth,editBook)
