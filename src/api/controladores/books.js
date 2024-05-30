@@ -24,12 +24,13 @@ const createBook = async (req, res, next) => {
     }
     const authorBookUpdated = await User.findByIdAndUpdate(
       authorId,
-      { $push: { bookPublished: newBook._id } },
+      { role:"author",
+        $push: { bookPublished: newBook._id } },
       { new: true }
     ).populate("bookPublished");
     const bookSave = await newBook.save();
 
-    return res.status(201).json({ newBook, authorBookUpdated });
+    return res.status(201).json({ bookSave, authorBookUpdated });
   } catch (error) {
     console.log(error);
     return res.status(400).json(error);
