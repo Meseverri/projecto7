@@ -4,13 +4,14 @@ const bcrypt = require("bcrypt");
 
 const register = async (req, res, next) => {
   try {
-    const { username, password,name }=req.body
-
+    const { userName, password, name } = req.body;
+    console.log(req.body);
     const newUser = new User({
-      userName:username,
-      password:password,
-      name:name,
-    role:"user"});
+      userName: userName,
+      password: password,
+      name: name,
+      role: "user",
+    });
 
     const userDuplicated = await User.findOne({ userName: req.body.userName });
     if (userDuplicated) {
@@ -70,7 +71,7 @@ const getUsers = async (req, res, next) => {
 
 const deleteUser = async (req, res, next) => {
   try {
-    const {userId}=req.params
+    const { userId } = req.params;
     const userDeleted = await User.findByIdAndDelete(userId);
     if (!userDeleted) {
       return res.status(404);
