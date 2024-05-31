@@ -13,7 +13,7 @@ const createBook = async (req, res, next) => {
       genres: genres,
       description: description,
     });
-
+    
     const bookDuplicated = await Book.findOne({
       authorId: authorId,
       title: title,

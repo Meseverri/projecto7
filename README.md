@@ -15,30 +15,35 @@ This API allows users to manage books, reviews, and user information. It include
 
 ### User Schema
 
-- *username*: String, required
-- *password*: String, required
-- *name*: String, required
-- *book_reviews*: Array of ObjectIDs (references to Review)
-- *bookPublished*: Array of ObjectIDs (references to Book)
-- *role*: String, default is "user", enum: ["user", "author", "admin"]
+### User Schema
+
+- **userName**: String, required
+- **password**: String, required
+- **name**: String, required
+- **bookReviews**: Array of ObjectIDs (references to Review)
+- **bookPublished**: Array of ObjectIDs (references to Book)
+- **role**: String, default is "user", enum: ["user", "author", "admin"]
+- **deleted**: Boolean, default is false
 
 ### Book Schema
 
-- *author_id*: ObjectID (reference to User), required
-- *name*: String, required
-- *number_of_pages*: Number, required
-- *reviews*: Array of ObjectIDs (references to Review)
-- *deleted*: Boolean, default is false
+- **authorId**: ObjectID (reference to User), required
+- **title**: String, required
+- **genres**: Array of strings, optional
+- **description**: String, optional
+- **reviewsId**: Array of ObjectIDs (references to Review)
+- **createdAt**: Date, default is the current date and time (automatically managed by Mongoose)
+- **updatedAt**: Date, default is the current date and time (automatically managed by Mongoose)
+
 
 ### Review Schema
 
-- *timestamp*: Date, default is Date.now
-- *user_id*: ObjectID (reference to User), required
-- *book_id*: ObjectID (reference to Book), required
-- *body*: String, required
-- *comments*: Array of ObjectIDs (references to User)
-- *rating*: Number, required
-- *blog_id*: ObjectID (reference to Blog)
+- **userId**: ObjectID (reference to User), required
+- **body**: String, optional
+- **rating**: Number, required, minimum value is 1, maximum value is 6
+- **bookId**: ObjectID (reference to Book), required
+- **createdAt**: Date, default is the current date and time (automatically managed by Mongoose)
+- **updatedAt**: Date, default is the current date and time (automatically managed by Mongoose)
 
 ## API Endpoints
 
@@ -108,7 +113,7 @@ Make API requests to the server using a tool like Postman or cURL.
 ### Users
 
 - `POST /users`: Create a new user
-  - Request body: `{ "username": "string", "password": "string", "name": "string" }`
+  - Request body: `{ "userName": "string", "password": "string", "name": "string" }`
 - `GET /users/:id`: Get user information by ID
 - `PUT /users/:id`: Update user information by ID
   - Request body: `{ "username": "string", "password": "string", "name": "string" }`
@@ -116,8 +121,8 @@ Make API requests to the server using a tool like Postman or cURL.
 
 ### Books
 
-- `POST /books`: Add a new book
-  - Request body: `{ "authorId": "ObjectID", "title": "string", "genres": ["string"], "description": "string" }`
+- `POST /books/:authorId`: Add a new book
+  - Request body: `{"title": "string", "genres": ["string"], "description": "string" }`
 - `GET /books`: Get all book details 
 - `GET /books/:id`: Get book details by ID
 - `PUT /books/:bookId/:authorId`: Update book information by ID and validating the author,*Note: the genere list will be replaced completly*
@@ -126,9 +131,10 @@ Make API requests to the server using a tool like Postman or cURL.
 
 ### Reviews
 
- `POST /reviews/:userId/:bookId`: Add a new review
-  - Request body: `{ "body": "string", "rating": "number", "bookId": "ObjectID" }`
-- `GET /reviews/:id`: Get review details by ID
+- `POST /reviews/:userId/:bookId`: Add a new review
+  - Request body: `{ "body": "string", "rating": "number" }`
+- `GET /reviews/:bookId`: Get reviews for a book details by bookID
+- `GET /reviews`
 - `PUT /reviews/:id`: Update review information by ID
   - Request body: `{ "userId": "ObjectID", "body": "string", "rating": "number", "bookId": "ObjectID" }`
 - `DELETE /reviews/:id`: Soft delete a review by ID
