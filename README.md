@@ -8,8 +8,8 @@ This API allows users to manage books, reviews, and user information. It include
 
 - User registration and authentication
 - CRUD operations for books and reviews
-- Comments on reviews
 - Rating system for books
+- Admin
 
 ## Schemas
 
@@ -58,7 +58,7 @@ This API allows users to manage books, reviews, and user information. It include
 ### Books
 
 - POST /books/:authorId : Add a new book
-- GET /books/:id : Get book details 
+- GET /books/:bookId : Get book details 
 - GET /books/: Get all book
 - PUT /books/:bookId/:authoId : Update book information
 - DELETE /books/:id : Soft delete a book
