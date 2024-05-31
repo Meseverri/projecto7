@@ -16,6 +16,13 @@ mongoose
     await Review.collection.drop();
     // Create all users with a for loop keep the id
     const allusers = await User.insertMany(userSeed);
+    //set user admin 
+    let admin = findUser(allusers, "Admin");
+    await User.findByIdAndUpdate(
+      admin._id,
+      { role: "admin" },
+      { new: true }
+    );
     // Orwell book publish
     let orwell = findUser(allusers, "Orwell");
     const newBook = new Book({
@@ -53,7 +60,6 @@ mongoose
       );
 
       const reviewSaved = await newReview.save();
-      console.log(reviewSaved);
     }
   })
   .catch((err) => console.log(`Error deleting data: ${err}`))
