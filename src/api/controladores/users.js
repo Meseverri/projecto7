@@ -5,7 +5,6 @@ const bcrypt = require("bcrypt");
 const register = async (req, res, next) => {
   try {
     const { userName, password, name } = req.body;
-    console.log(req.body);
     const newUser = new User({
       userName: userName,
       password: password,
@@ -74,7 +73,7 @@ const deleteUser = async (req, res, next) => {
     const { userId } = req.params;
     const userDeleted = await User.findByIdAndDelete(userId);
     if (!userDeleted) {
-      return res.status(404);
+      return res.status(404).json("Usuario inexistente");
     }
     return res.status(200).json({
       mensaje: "Este usuario ha sido eliminado",
@@ -86,4 +85,17 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
-module.exports = { register, login, getUser, getUsers, deleteUser };
+const changeRoleAdmin = async (req, res) => {
+  try {
+    console.log(req.params.userId)
+    const adminConverted = await User.findByIdAndUpdate(
+      req.params.userId,
+      { role: "admin" },
+      { new: true }
+    );
+    return res.status(201).json(adminConverted);
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+};
+module.exports = {changeRoleAdmin, register, login, getUser, getUsers, deleteUser,};

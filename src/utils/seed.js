@@ -14,14 +14,24 @@ mongoose
     await User.collection.drop();
     await Book.collection.drop();
     await Review.collection.drop();
-    // Create all users with a for loop keep the id
-    const allusers = await User.insertMany(userSeed);
+    // Create all users with a for loop keep the id 
+    //*Nota: no se estan encriptando al hacer insert many idea hacer un bucle e insertarlo uno a uno.
+    // const allusers = await User.insertMany(userSeed);
+    const allusers =[];
+    for (let i = 0; i < userSeed.length; i++) {
+      const newUser = new User(userSeed[i]);
+
+      const userSaved = await newUser.save();
+      allusers.push(userSaved);
+    }
+
     //set user admin 
     let admin = findUser(allusers, "Admin");
     await User.findByIdAndUpdate(
       admin._id,
       { role: "admin" },
       { new: true }
+
     );
     // Orwell book publish
     let orwell = findUser(allusers, "Orwell");

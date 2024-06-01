@@ -115,6 +115,8 @@ Make API requests to the server using a tool like Postman or cURL.
 - `POST /users`: Create a new user
   - Request body: `{ "userName": "string", "password": "string", "name": "string" }`
 - `GET /users/:id`: Get user information by ID
+-`GET /users/:id/admin` : Update a role to admin 
+  - request auth bearer Token from an existing admin
 - `PUT /users/:id`: Update user information by ID
   - Request body: `{ "username": "string", "password": "string", "name": "string" }`
 - `DELETE /users/:id`: Delete a user by ID
