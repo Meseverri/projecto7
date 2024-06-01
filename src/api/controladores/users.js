@@ -72,6 +72,7 @@ const deleteUser = async (req, res, next) => {
   try {
     const { userId } = req.params;
     const userDeleted = await User.findByIdAndDelete(userId);
+    
     if (!userDeleted) {
       return res.status(404).json("Usuario inexistente");
     }
@@ -80,7 +81,7 @@ const deleteUser = async (req, res, next) => {
       userDeleted,
     });
   } catch (error) {
-    console.log(error);
+    console.log(error)
     return res.status(500).json(error);
   }
 };

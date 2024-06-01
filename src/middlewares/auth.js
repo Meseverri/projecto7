@@ -12,22 +12,26 @@ const authenticateUser = async (req, res, next) => {
 
   try {
     const { id } = jwt.verify(token, process.env.jwt_token);
-    req.user = id;
-    if (req.params.userId === id) next();
+    if (req.params.userId === id) {
+      
+          console.log(id);
+          console.log(req.params.userId);
+      
+      next();
+    };
     const user = await User.findById(id);
-    
-    if (!user) return res.status(401).json({ error: "Access denied. User invalid"})
-      console.log(id);
-      console.log(user.role);
+
+    if (!user)
+      return res.status(401).json({ error: "Access denied. User invalid" });
     if (user.role !== "admin") {
       return res
-      .status(403)
-      .json({ error: "Access denied. You do not have the required role." });
+        .status(403)
+        .json({ error: "Access denied. You do not have the required role." });
     } else {
-      next();
+      // next();
     }
   } catch (ex) {
-    console.log(ex)
+    console.log(ex);
     res.status(400).send({ error: "Invalid token." });
   }
 };
