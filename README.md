@@ -1,5 +1,5 @@
 ### README
-> *Nota para el profesor*:en esta entrega hice mas de los requisitos necesarios. Me emocione al hacer este projecto... se que hay muchas cosas que mejorar y documentar mejor... al volver a leer los requisitos me di cuenta de eso. Estare pendiente para corregir los el objetivo de esta practica.  
+> *Nota para el profesor*: en esta entrega hice más de los requisitos necesarios. Me emocione al hacer este projecto... se que hay muchas cosas que mejorar y documentar mejor... al volver a leer los requisitos me di cuenta de eso. Estare pendiente para corregir los el objetivos de esta practica.  
 # Book App API
 
 This API allows users to manage books, reviews, and user information. It includes schemas for Users, Books, and Reviews.
