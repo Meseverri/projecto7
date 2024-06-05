@@ -35,7 +35,8 @@ const login = async (req, res, next) => {
     if (user) {
       if (bcrypt.compareSync(password, user.password)) {
         const token = generateSign(user._id);
-        return res.status(200).json({ user, token });
+        const ret = { user, token };
+        return res.status(200).json(ret);
       } else {
         return res.status(400).json("el usuario o contraseña no existe");
       }
@@ -43,7 +44,7 @@ const login = async (req, res, next) => {
       return res.status(400).json("el usuario o contraseña no existe");
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(400).json(error);
   }
 };
@@ -72,23 +73,22 @@ const deleteUser = async (req, res, next) => {
   try {
     const { userId } = req.params;
     const userDeleted = await User.findByIdAndDelete(userId);
-    
     if (!userDeleted) {
       return res.status(404).json("Usuario inexistente");
     }
     return res.status(200).json({
       mensaje: "Este usuario ha sido eliminado",
-      userDeleted,
+      user: userDeleted,
     });
+
   } catch (error) {
-    console.log(error)
-    return res.status(500).json(error);
+    return res.status(403).json(error);
   }
 };
 
 const changeRoleAdmin = async (req, res) => {
   try {
-    console.log(req.params.userId)
+    console.log(req.params.userId);
     const adminConverted = await User.findByIdAndUpdate(
       req.params.userId,
       { role: "admin" },
@@ -99,4 +99,11 @@ const changeRoleAdmin = async (req, res) => {
     return res.status(400).json(error);
   }
 };
-module.exports = {changeRoleAdmin, register, login, getUser, getUsers, deleteUser,};
+module.exports = {
+  changeRoleAdmin,
+  register,
+  login,
+  getUser,
+  getUsers,
+  deleteUser,
+};

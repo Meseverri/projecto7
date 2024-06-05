@@ -5,34 +5,31 @@ const { User } = require("../api/modelos/users");
 require("dotenv").config();
 
 const authenticateUser = async (req, res, next) => {
-  const token = req.header("Authorization").replace("Bearer ", "");
-  if (!token) {
-    return res.status(401).send({ error: "Access denied. No token provided." });
-  }
-
+  
   try {
+    const token = req.header("Authorization").replace("Bearer ", "");
+
+    if (!token) {
+      return res.status(401).json({ error: "Access denied. No token provided." });
+    }
     const { id } = jwt.verify(token, process.env.jwt_token);
+    
     if (req.params.userId === id) {
-      
-          console.log(id);
-          console.log(req.params.userId);
-      
       next();
     };
+
     const user = await User.findById(id);
 
-    if (!user)
+    if (!user){
       return res.status(401).json({ error: "Access denied. User invalid" });
-    if (user.role !== "admin") {
-      return res
-        .status(403)
-        .json({ error: "Access denied. You do not have the required role." });
-    } else {
-      // next();
     }
+      
+    if (user.role === "admin") {
+      next();
+    } 
+
   } catch (ex) {
-    console.log(ex);
-    res.status(400).send({ error: "Invalid token." });
+    return res.status(400).json({ error: "Invalid token." });
   }
 };
 
